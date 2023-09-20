@@ -20,4 +20,77 @@ endif::backend-html5[]
 https://htl-leonding-college.github.io/quarkus-lecture-notes/
 
 
+|===
+|Name |Thema
 
+|Aichinger Tobias
+|Elektrohandel
+
+|Al Desoky Abdullah
+|Fitness-Ratgeber
+
+|Balazs Bálint
+|Kochrezept
+
+|Berg Bajtik
+|Schwimmwettkampf
+
+|Breinesberger Markus
+|Friedhofsverwaltung
+
+|Cao Anton
+|Restaurant
+
+|Cvijić Luka
+|Autohändler
+
+|Daxinger Oliver
+|Dienstplan für Straßenmeisterei
+
+|Fröller Felix
+|Autoverleih
+
+|Gruber Moritz
+|Tennisverein
+
+|Ilming Winnie
+|Bilbliothek
+
+|Lehner David
+|Bauernhof (Planung der Felder, Was wird angebaut)
+
+|Nestler Linus
+|Zoo
+
+|Nikolaus Alexander
+|Christkindl-Vw
+
+|Nurceski Said
+|Kino
+
+|Salkovic Armin
+|Reisebusunternehmen
+
+|Schludermann Julian
+|Zug (Welche Linien, Fahrplan)
+
+|Schnalzenberger Arwed
+|Gärtnerei
+
+|Seifried Erik
+|Fussball-Liga (welches Team spielt gegen welches mit Mannschaften mit sämtlichen Ereignissen während eines Spiels)
+
+|Sonnleitner Lukas
+|Fahrschule
+
+|===
+
+
+* Application Server
+** Web-Server für Java Applikationen
+** Mit einem Java Application Server können Java Programme "ins Internet gebracht werden"
+** Bsp: Glassfish (Referenzimplementierung), Payara, Wildfly, ...
+
+
+* REST
+** Internet für Prozesse und Maschinen
