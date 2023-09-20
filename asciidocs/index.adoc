@@ -94,3 +94,4 @@ https://htl-leonding-college.github.io/quarkus-lecture-notes/
 
 * REST
 ** Internet für Prozesse und Maschinen
+

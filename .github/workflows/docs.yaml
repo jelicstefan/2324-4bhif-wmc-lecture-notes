@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build
-        uses: quirinecker/asciidoctor-convert-action@1.0
+        uses: quirinecker/asciidoctor-convert-action@main
         with:
           slides: ${{ env.SLIDES }}
           inputPath: ${{ env.INPUTPATH }}
