@@ -59,6 +59,9 @@ https://htl-leonding-college.github.io/quarkus-lecture-notes/
 |Lehner David
 |Bauernhof (Planung der Felder, Was wird angebaut)
 
+|Mali Laurent
+|Fussballverein
+
 |Nestler Linus
 |Zoo
 
@@ -92,6 +95,38 @@ https://htl-leonding-college.github.io/quarkus-lecture-notes/
 ** Bsp: Glassfish (Referenzimplementierung), Payara, Wildfly, ...
 
 
-* REST
-** Internet für Prozesse und Maschinen
+
+
+== 2023-09-25 REST-Service
+
+IMPORTANT: Internet für Prozesse und Maschinen
+
+=== REST-clients
+
+* Browser (für GET)
+* Browser-Plugins (für GET, POST, DELETE, PUT, PATCH, ...)
+* Programme wie Postman, Insomnia, ...
+* REST-Client in der IDE
+* Test-Apis wie RestAssured, Karate,...
+* CLI-clients wir curl, httpie, ...
+* ...
+
+==== Verschiedene Ausgaben für identes GET möglich
+
+* durch Angabe eines unterschiedlichen MediaTypes
+
+==== ConfigProperty
+
+* Variablen können auf verschiedene Arten einen Wert erhalten
+
+https://quarkus.io/guides/config-reference[^]
+
+image::confi-properties.png[]
+
+
+
+=== HÜ
+
+* Für eine Klasse (Stammdaten) einen Rest-Endpoint erstellen mit CRUD-Funktionalität, der die Daten in einer List speichert.
+
 
