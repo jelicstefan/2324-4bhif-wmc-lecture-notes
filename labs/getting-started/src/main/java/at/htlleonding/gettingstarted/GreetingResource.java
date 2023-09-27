@@ -26,11 +26,11 @@ public class GreetingResource {
     }
 
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Vehicle getVehicleJson() {
-        return new Vehicle("Opel", "Kadett");
-    }
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Vehicle getVehicleJson() {
+//        return new Vehicle("Opel", "Kadett");
+//    }
 
     @GET
     @Produces(MediaType.APPLICATION_XML)
@@ -39,6 +39,7 @@ public class GreetingResource {
     }
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getVehicleAsResponse() {
         var vehicle = new Vehicle("Opel", "Kadett");
         return Response.ok(vehicle).build();
