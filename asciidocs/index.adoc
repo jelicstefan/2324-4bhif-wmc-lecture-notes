@@ -129,4 +129,58 @@ image::confi-properties.png[]
 
 * Für eine Klasse (Stammdaten) einen Rest-Endpoint erstellen mit CRUD-Funktionalität, der die Daten in einer List speichert.
 
+== 2023-10-02 REST - Resources and caching
 
+=== Cashing Explanation
+
+==== Cashing
+* Es gibt Server und Clients
+* Jedes mal, wenn ein Client etwas benötigt, setzt er einen Request an den Server ab
+* Da kann schon was zusammen kommen
+
+==== Browser
+* HTTP1.1 sagt: Jeder Browser darf nur maximal 2 Connections pro Webpage offen haben
+* Chrome hat ein Limit von 6 pro remote- site und 10 über den gesamten Browser
+* Wenn man da auf viele kleine Antworten wartet, dann kann das zu Verstopfungen führen
+
+==== Lösung
+* Ich (der Client) hole mir nicht immer das allerneueste Objekt vom Backend, sondern gebe mich mit einem etwas älteren zufrieden. (-> weniger Requests)
+* Der Server schickt nur ein neues Objekt, falls sich die Antwort seit der letzten Anfrage geändert hat (sonst nicht)
+* Geht natürlich nur bei GET Requests
+
+=== Expires
+
+==== HTTP-Header
+* Ich biete als Server eine Resource an
+* Wenn ich eine Response schicke, hänge ich ein Header-Feld an
+
+image::http-bsp.png[]
+
+* Der Client weiß jetzt, dass er vor diesem Timestamp nicht nochmal fragen braucht
+* Der Client gibt in diesem Fall dem Programmierer die 'alte' Antwort (passiert in Clients automatisch)
+* Ansonsten holt sich der Client eine neue Resource ab (mit neuem expires-feld)
+
+==== Expires
+* Eingestellt am Server
+** Muss sich mal wer überlegen
+** Kann sich auch ändern
+* Passiert dann eigentlich im Client
+* Ist für den Entwickler 'transparent'
+* Der Entwickler macht einen einen Request, der Client merkt sich die Antworten per Resource (URL)
+
+==== Beispiel:
+image::expires-bsp.png[]
+
+=== E-Tag Hashing
+
+==== E-Tag
+* Ich biete am Server eine Resource an
+* Wenn ich eine Resource schicke, hänge ich einen Hash-Wert an, der eindeutig ist für diese 'Version' der Antwort
+* Wenn ein Client die Resource anfragt, schickt er den Hash-Wert mit
+* Am Server: Wenn der Hash-Wert der Antwort sich mit dem mitgeschickten Hash-Wert deckt, dann schicke ich einfach den HTTP-Status-Code: *304 - Not Modified*
+
+===== Beispiel:
+image::etag-bsp.png[]
+
+=== HTTP status ranges in a nutshell
+image::nutshell-bsp.png[]
