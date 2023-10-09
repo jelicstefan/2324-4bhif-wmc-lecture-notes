@@ -150,7 +150,7 @@ image::confi-properties.png[]
 
 === Expires
 
-==== HTTP-Header
+==== Feld im HTTP-Header
 * Ich biete als Server eine Resource an
 * Wenn ich eine Response schicke, hänge ich ein Header-Feld an
 
@@ -158,7 +158,7 @@ image::http-bsp.png[]
 
 * Der Client weiß jetzt, dass er vor diesem Timestamp nicht nochmal fragen braucht
 * Der Client gibt in diesem Fall dem Programmierer die 'alte' Antwort (passiert in Clients automatisch)
-* Ansonsten holt sich der Client eine neue Resource ab (mit neuem expires-feld)
+* Ansonsten holt sich der Client eine neue Resource ab (mit neuem expires-Feld)
 
 ==== Expires
 * Eingestellt am Server
@@ -167,6 +167,7 @@ image::http-bsp.png[]
 * Passiert dann eigentlich im Client
 * Ist für den Entwickler 'transparent'
 * Der Entwickler macht einen einen Request, der Client merkt sich die Antworten per Resource (URL)
+* Spart die komplette Übertragung des Requests und des Responses
 
 ==== Beispiel:
 image::expires-bsp.png[]
@@ -178,6 +179,7 @@ image::expires-bsp.png[]
 * Wenn ich eine Resource schicke, hänge ich einen Hash-Wert an, der eindeutig ist für diese 'Version' der Antwort
 * Wenn ein Client die Resource anfragt, schickt er den Hash-Wert mit
 * Am Server: Wenn der Hash-Wert der Antwort sich mit dem mitgeschickten Hash-Wert deckt, dann schicke ich einfach den HTTP-Status-Code: *304 - Not Modified*
+* Spart eigentlich 'nur' die Rückübertragung der Daten im body des Responses (wenn es sich nicht verändert hat)
 
 ===== Beispiel:
 image::etag-bsp.png[]
