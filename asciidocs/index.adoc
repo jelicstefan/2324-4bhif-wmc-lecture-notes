@@ -124,6 +124,118 @@ https://quarkus.io/guides/config-reference[^]
 image::confi-properties.png[]
 
 
+==== Quarkus REST Projekt
+
+* File -> new -> Project... -> Fill all the fields and choose -> Click "Next" -> Choose "RESTEasy Reactive" & "RESTEasy Reactive Jackson"
+
+.Konfigurationen
+[%collapsible]
+====
+image::quarkus-project-1.png[]
+image::quarkus-project-2.png[]
+====
+
+* Als nächstes klickt auf "load as maven project" in der rechten unteren Ecke oder macht einen Rechtsklick auf das "pom.xml" File -> "Maven" -> "Reload project"
+
+* Gebt dieses Kommando in das Terminal in eurem Projekt-folder ein, um das Programm zu starten:
+
+[source, bash]
+----
+./mvnw clean quarkus:dev
+----
+
+* Wenn es Probleme mit der JAVA_HOME Environment-Variable gibt, versucht es einmal mithilfe dieser Links zu lösen:
+
+** Windows: https://mkyong.com/java/how-to-set-java_home-on-windows-10/[^]
+** MacOS: http://widerin.net/blog/set-java_home-to-latest-java-on-osx/[^]
+** Linux: https://itsfoss.com/set-java-home-ubuntu/[^] (Step 3)
+
+* Nun kann man einen "http-requests" folder mit einem "requests.http" File erstellen und in diesem schreibt man eine GET-Request, um den Output unserer Applikation zu testen:
+
+[source, http]
+----
+GET http://localhost:8080/hello
+####
+----
+Man kann auch in der rechten oberen Ecke auf "Examples" klicken und dann weiters auf "Get Requests", um sich mehr Beispiele von http-Requests ansehen zu können.
+
+."Examples"-location
+[%collapsible]
+====
+image::intellij-http-examples.png[]
+====
+
+* Öffnet nun das "ExampleResource.java" File und benennt die Klasse neu.
+
+[source, java]
+----
+@Path("/hello")
+public class GreetingResource {
+    @ConfigProperty(name="test", defaultValue = "hello")
+    String test;
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        return String.format("%s 4bhif", test);
+    }
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public String hello1() {
+        return String.format("<h1>%s 4bhif", test);
+    }
+}
+----
+
+* Nun kann man wieder den Output mithilfe unseres "requests.http" File testen:
+
+[source, http]
+----
+GET http://localhost:8080/hello
+Accept: text/plain #<.>
+####
+GET http://localhost:8080/hello
+Accept: text/html #<.>
+####
+----
+
+<.> Durch "Accept" wird nur diese Form an Daten angenommen. Hier ist es nur normaler Text
+
+<.> Dieser Get-Request nimmt nur normalen html Code an.
+
+Der Typ der Daten wird im Code durch das "@Produces(MediaType" festgelegt.
+
+* Man kann auch mehrere Files erstellen, um den Wert von Variablen festzulegen.
+
+* One can also create several files to define variables like the "text" variable from above in the "GreetingResource.java" File
+
+** Mehr Informationen dazu gibt es oben bei dem Kapitel über "ConfigProperty"
+
+* Quarkus Tests:
+
+.Starten der Tests
+[source, bash]
+----
+./mvnw clean quarkus:test
+----
+
+.-> Wahrscheinlich wirst du jetzt einen error kriegen, da wir den Output unserer Get-Request geändert haben. Das wirst du in den Tests ändern müssen
+[source, java]
+----
+@QuarkusTest
+public class GreetingResourceTest {
+    @Test
+    public void testHelloEndpoint() {
+        given()
+          .when().get("/hello")
+          .then()
+             .statusCode(200)
+             .body(is("servus 4bhif"));
+    }
+}
+----
+
+Für unsere Tests werden wir im laufe des Jahres die rest-assured" und die "assertj" Bibliotheken verwenden.
+
 
 === HÜ
 
