@@ -231,7 +231,7 @@ Abteilung "1" <-left- "*" Arbeitszeit: > in
 |Hansi hat einen Hund Flocki
 
 |Komposition
-|*besteht-aus* Beziehung; Merkmal: Objekt wird zerstört bei Zerlegung
+|*besteht-aus* Beziehung; Merkmal: *Gesamtes Objekt wird zerstört bei Zerlegung*
 |Haus besteht aus Etagen
 
 |Aggregation
@@ -254,4 +254,81 @@ Abteilung "1" <-left- "*" Arbeitszeit: > in
 
 Im obigen Beispiel sind Person und Abteilung die Stammdaten, die Arbeitszeit ist die Klasse der Bewegungsdaten.
 
+
+== 2023-10-16
+
+=== CLD vs ERD
+
+==== CLD
+
+.\*-* Beziehung
+[plantuml,cldvserd,svg]
+----
+@startuml
+left to right direction
+Kunde "1" -- "*" Rechnung
+Rechnung "*" -- "*" Produkt
+@enduml
+----
+
+.\*-* Beziehung mit assoziativer Klasse, Variante 1
+[plantuml,cldvserd2,svg]
+----
+@startuml
+left to right direction
+
+class Rechnung
+class Kunde
+class Produkt
+
+Kunde "1" -- "*" Rechnung
+(Rechnung, Produkt)  .. Rechnungsposition
+@enduml
+----
+
+.\*-* Beziehung mit assoziativer Klasse, Variante 2
+[plantuml,cldvserd,svg]
+----
+@startuml
+left to right direction
+Kunde "1" <-- "*" Rechnung
+Rechnung "1" <-- "*" Rechnungsposition
+Rechnungsposition "*" --> "1" Produkt
+@enduml
+----
+
+
+==== ERD
+
+.n:m-Beziehung
+[plantuml,cldvserd3,svg]
+----
+@startuml
+left to right direction
+
+entity Rechnung
+entity Kunde
+entity Produkt
+
+Kunde ||--|{ Rechnung
+Rechnung }|--|{ Produkt
+@enduml
+----
+
+.n:m-Beziehung aufgelöste (mit assoziativer Tabelle)
+[plantuml,cldvserd3,svg]
+----
+@startuml
+left to right direction
+
+entity Rechnung
+entity Kunde
+entity Produkt
+entity RechPos
+
+Kunde ||--|{ Rechnung
+Rechnung ||--|{ RechPos
+RechPos }|--|| Produkt
+@enduml
+----
 
