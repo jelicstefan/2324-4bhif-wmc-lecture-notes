@@ -131,6 +131,7 @@ image::confi-properties.png[]
 
 == 2023-10-02 REST - Resources and caching
 
+[Al Desoky]
 === Cashing Explanation
 
 ==== Cashing
@@ -186,3 +187,71 @@ image::etag-bsp.png[]
 
 === HTTP status ranges in a nutshell
 image::nutshell-bsp.png[]
+
+
+== 2023-10-09
+=== k8s
+
+* https://www.youtube.com/playlist?list=PLy7NrYWoggjziYQIDorlXjTvvwweTYoNC[Nana k8s]
+
+=== Beziehungen in Klassendiagrammen
+
+[plantuml,cld-1]
+----
+@startuml
+class Person {
+  -firstName: String
+  -lastName: String
+}
+
+class Abteilung {
+  -name: String
+}
+
+class Arbeitszeit {
+  -von: LocalDateTime
+  -bis: LocalDateTime
+  -person: Person
+  -abteilung: Abteilung
+}
+
+Person "1" <-right- "*" Arbeitszeit : > arbeitet
+Abteilung "1" <-left- "*" Arbeitszeit: > in
+
+@enduml
+----
+
+.Beziehungen zwischen Klassen/Tabellen
+[%autowidth]
+|===
+|Beziehungen |Beschreibung |Beispiel
+
+|Assoziation
+|*benutzt-Beziehung*
+|Hansi hat einen Hund Flocki
+
+|Komposition
+|*besteht-aus* Beziehung; Merkmal: Objekt wird zerstört bei Zerlegung
+|Haus besteht aus Etagen
+
+|Aggregation
+|*besteht-aus* Beziehung; Merkmal: Objekt wird bei Zerlegung *NICHT* zerstört
+|Auto hat Autoreifen
+
+|Vererbung
+|*is-a* Vererbungsbeziehung
+|Ein Hund erbt vom Säugetier
+|===
+
+* Was sind Stamm- und Bewegungsdaten:
+** auch Master-Data und Transaction-Data genannt
+** Stammdaten sind auch mehrere Perioden gültig zB Personen, Produkte, Kategorien, ...
+** Bewegungsdaten sind meist nur eine Periode (zB Geschäftsjahr) gültig
+*** zB Rechnungen, Bestellungen
+*** man erkennt Bewegungsdaten an einem Datum zB Rechnungsdatum, Bestelldatum
+*** Das Geburtsdatum bei Personen zählt nicht
+*** Bewegungsdaten sind meist zwischen Stammdaten angesiedelt
+
+Im obigen Beispiel sind Person und Abteilung die Stammdaten, die Arbeitszeit ist die Klasse der Bewegungsdaten.
+
+
