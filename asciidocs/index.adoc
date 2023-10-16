@@ -528,7 +528,7 @@ image::response-example.png[]
 
 === Servlet
 
-* Java-Klassen, welches in Internet kommt
+* Als Jakarta Servlet (früher Java Servlet) bezeichnet man Java-Klassen, deren Instanzen innerhalb eines Webservers Anfragen von Clients entgegennehmen und beantworten. Der Inhalt der Antworten kann dabei dynamisch, also im Moment der Anfrage, erstellt werden und muss nicht bereits statisch (etwa in Form einer HTML-Seite) für den Webserver verfügbar sein.Als Jakarta Servlet (früher Java Servlet) bezeichnet man Java-Klassen, deren Instanzen innerhalb eines Webservers Anfragen von Clients entgegennehmen und beantworten. Der Inhalt der Antworten kann dabei dynamisch, also im Moment der Anfrage, erstellt werden und muss nicht bereits statisch (etwa in Form einer HTML-Seite) für den Webserver verfügbar sein. https://de.wikipedia.org/wiki/Jakarta_Servlet[wikipedia^]
 * mit einem Pfad wird es aktiviert
 
 
