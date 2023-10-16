@@ -332,3 +332,17 @@ RechPos }|--|| Produkt
 @enduml
 ----
 
+=== Übung Mikroprojekt
+
+* Tag "JsonObject"
+* Erstellen Sie einen Endpoint, der ein Array (jakarta.json.JsonArray) von Json-Objekten (jakarta.json.JsonObject) zurückgibt, passend zu Ihrer Themenstellung
+* Lesen Sie diese Objekte vorher aus einer Datei ein.
+. Erstellen Sie weiters dazugehörige rest-assured-Integrations-Tests
+* Termin: 21.10.2023 20:00
+
+
+
+
+
+
+

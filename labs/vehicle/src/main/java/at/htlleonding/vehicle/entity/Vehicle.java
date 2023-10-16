@@ -1,5 +1,8 @@
 package at.htlleonding.vehicle.entity;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Vehicle {
 
     private String brand;
