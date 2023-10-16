@@ -332,3 +332,90 @@ RechPos }|--|| Produkt
 @enduml
 ----
 
+=== JSON-Binding
+
+* Java-Objekte werden in json konvertiert
+** java-object zu json: marshalling
+** json zu java-object: unmarshalling
+
+* Libraries für JSON und XML
+** JSON-B, Jackson -> JSON
+** JAXB -> XML
+
+IMPORTANT: bei den Entitäten @XMLRootElement hinzufügen
+
+[source, java]
+----
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Vehicle {
+}
+----
+
+=== JsonObject
+
+* eigenes JsonObject erstellen:
+[source, java]
+----
+public class GreetingResource{
+    @GET
+    @Path("myJson")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonObject myCustomJsonObject(){
+        JsonObject myObject = Json.createObjectBuilder()
+                .add("first-name", "Max")
+                .add("last-name","Mustermann")
+                .build();
+        return myObject;
+    }
+}
+----
+
+.mittels GET-Request:
+[source, http]
+----
+GET http://localhost:8080/vehicle/myJson
+Accept: application/json
+----
+
+image::jsonobject-example.png[]
+
+=== Response
+
+* eigene Response erstellen:
+[source, java]
+----
+public class GreetingResource{
+    @GET
+    @Path("myresponse")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response myCustomResponse() {
+        return Response.ok(new Vehicle("Opel", "Karl")
+                )
+                .header("MY_HEADER", "java is cool")
+                .build();
+    }
+}
+----
+
+.mittels GET-Request:
+[source, http]
+----
+GET http://localhost:8080/vehicle/myresponse
+Accept: application/json
+----
+
+image::response-example.png[]
+
+=== Exceptions
+* In Java gibt es:
+** unchecked exceptions
+** checked exceptions
+
+=== Servlet
+
+* Java-Klassen, welches in Internet kommt
+* mit einem Pfad wird es aktiviert
+
+
