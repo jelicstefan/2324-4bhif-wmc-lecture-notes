@@ -1,10 +1,17 @@
 package at.htlleonding.vehicle.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
+@Entity
 @XmlRootElement
 public class Vehicle {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String brand;
     private String model;
 
@@ -34,8 +41,23 @@ public class Vehicle {
     public void setModel(String model) {
         this.model = model;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     //endregion
 
 
-
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                '}';
+    }
 }

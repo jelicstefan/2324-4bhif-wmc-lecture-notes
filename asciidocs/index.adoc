@@ -548,6 +548,23 @@ image::https://media.geeksforgeeks.org/wp-content/uploads/20230714113547/Excepti
 * Termin: 21.10.2023 20:00
 
 
+== 2023-10-23
+
+=== JPA
+
+* Zustände eines Objekts
+
+*N https://quarkus.io/guides/hibernate-orm[Using Hibernate ORM and Jakarta Persistence^]
+
+=== DevServices
+
+* Damit sich der Docker Container der DevServices nicht bei jedem Programmstart neu startet, kann folgende Datei erstellt werden:
++
+.~/.testcontainers.properties
+[source,properties]
+----
+testcontainers.reuse.enable=true
+----
 
 
 
