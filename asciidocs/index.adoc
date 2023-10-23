@@ -554,7 +554,7 @@ image::https://media.geeksforgeeks.org/wp-content/uploads/20230714113547/Excepti
 
 * Zustände eines Objekts
 
-*N https://quarkus.io/guides/hibernate-orm[Using Hibernate ORM and Jakarta Persistence^]
+* https://quarkus.io/guides/hibernate-orm[Using Hibernate ORM and Jakarta Persistence^]
 
 === DevServices
 
