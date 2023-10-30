@@ -566,8 +566,38 @@ image::https://media.geeksforgeeks.org/wp-content/uploads/20230714113547/Excepti
 testcontainers.reuse.enable=true
 ----
 
+== Feedback Miniprojekt
 
+* siehe Aichinger
+** Dependency Injection vs. Singleton Pattern
 
+* Offene Fragen
+** Separation of concerns
+*** siehe Ken Fogel, Transitioning to Java-Kickstart your polyglot programming journey by getting a clear
+understanding of Java, packt, 2023
+*** https://dev.to/tamerlang/separation-of-concerns-the-simple-way-4jp2
+
+** Lambda-Expressions?
+** Dependency Injection
+
+** Warum gibt es so viele verschiedene Arten von Repos (git, Persistierung, ...)
+
+////
+
+== Übung JPA
+
+* In einem eigenen Repository
+** Die Entitäten des Mikroprojekts kopieren
+** Die Entitäten mit JPA-Annotationen versehen
+** Geeignete Repositories erstellen
+** Eine lokale DerbyDb verwenden (ohne Docker)
+** Mehrere Abfragen erstellen (zB entprechend den User Stories)
+* In Integrationstests diese Abfragen mit assertj-core und assertj-db abtesten.
+* Zusätzlich eine Vererbungsbeziehung erstellen (eine Basisklasse, zwei Subklassen)
+
+////
+
+////
 
 
 
