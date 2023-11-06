@@ -582,7 +582,21 @@ understanding of Java, packt, 2023
 
 ** Warum gibt es so viele verschiedene Arten von Repos (git, Persistierung, ...)
 
-////
+== 2023-11-06
+
+=== pom.xml
+
+image::pomxml.png[]
+
+=== REST-Client
+
+=== JPA
+
+
+
+
+
+
 
 == Übung JPA
 
@@ -595,9 +609,9 @@ understanding of Java, packt, 2023
 * In Integrationstests diese Abfragen mit assertj-core und assertj-db abtesten.
 * Zusätzlich eine Vererbungsbeziehung erstellen (eine Basisklasse, zwei Subklassen)
 
-////
 
-////
+
+
 
 
 
