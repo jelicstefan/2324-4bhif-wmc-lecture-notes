@@ -592,12 +592,6 @@ image::pomxml.png[]
 
 === JPA
 
-
-
-
-
-
-
 == Übung JPA
 
 * In einem eigenen Repository
@@ -609,9 +603,114 @@ image::pomxml.png[]
 * In Integrationstests diese Abfragen mit assertj-core und assertj-db abtesten.
 * Zusätzlich eine Vererbungsbeziehung erstellen (eine Basisklasse, zwei Subklassen)
 
+== 2023-11-06
 
+=== Dependencies in Quarkus
 
+* Resteasy
+** REST-Endpunkt (Server)
+* Jackson
+** JSON - Writer/Reader
+* JAXB
+** XML - Writer/Reader
+* Arc
+** Bibliothek für das objektrelationale Mapping mit Hibernate (JPA)
+* PostgreSQL
+** JDBC-Treiber
 
+=== Quarkus-Parameter
 
+* PathParam
+* QueryParam
+* FormParam
 
+Mehr dazu
+link:https://quarkus.io/guides/rest-client-reactive[hier]
 
+==== Query Parameter
+
+[source,Java]
+----
+@Path("/extensions")
+@RegisterRestClient
+public interface ExtensionsService {
+    @GET
+    Set<Extension> getById(@QueryParam("id") String id);
+}
+----
+
+==== Mapping
+
+[source,Java]
+----
+@Path("/extensions")
+@RegisterRestClient(configKey = "extensions-api")
+public interface ExtensionsService {
+
+    @GET
+    Set<Extension> getById(@QueryParam("id") Integer id);
+
+    @GET
+    Set<Extension> getByName(@RestQuery String name);
+
+    @GET
+    Set<Extension> getByFilter(@RestQuery Map<String, String> filter);
+
+    @GET
+    Set<Extension> getByFilters(@RestQuery MultivaluedMap<String, String> filters);
+
+}
+----
+
+=== JSON-Properties (für Jackson)
+
+[source,Java]
+----
+class Person {
+    @JsonProperty("first_name")
+    public String firstName;
+    @JsonProperty("last_name")
+    public String lastName;
+}
+----
+
+=== POST mit URI
+
+[source,Java]
+----
+class PersonResource {
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addPerson(Person person, @Context URI uriInfo) {
+        personRepository.add(person);
+        URI uri = uriInfo
+            .getAbsolutePathBuilder()
+            .path("42")
+            .build();
+
+        return Response
+                .created(uri)
+                .build();
+    }
+}
+----
+
+=== EntityManager
+
+Der EntityManager in Java ist eine Schlüsselkomponente der Java Persistence API (JPA), die dazu dient, Datenbank-Entitäten zu verwalten, erstellen, aktualisieren und löschen.
+
+Um den EntityManager in einem Repository zu verwenden, muss man ihn wie folgt einbinden:
+
+[source,Java]
+----
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+
+@ApplicationScoped
+class Repository {
+    @Inject
+    EntityManager em;
+}
+----
