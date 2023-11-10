@@ -594,7 +594,7 @@ image::pomxml.png[]
 
 == Übung JPA
 
-* In einem eigenen Verzeichnis im microproject - Repository
+* In einem eigenen Verzeichnis `backend-jpa` im microproject - Repository
 ** Die Entitäten des Mikroprojekts kopieren
 ** Die Entitäten mit JPA-Annotationen versehen
 ** Geeignete Repositories erstellen
