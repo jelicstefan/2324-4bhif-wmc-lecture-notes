@@ -601,7 +601,7 @@ image::pomxml.png[]
 ** Eine lokale DerbyDb verwenden (ohne Docker)
 ** Mehrere Abfragen erstellen (zB entprechend den User Stories)
 * In Integrationstests diese Abfragen mit assertj-core und assertj-db abtesten.
-* Zusätzlich eine Vererbungsbeziehung erstellen (eine Basisklasse, zwei Subklassen)
+* [.line-through]#Zusätzlich eine Vererbungsbeziehung erstellen (eine Basisklasse, zwei Subklassen)# [Haben wir noch nicht besprochen, daher noch nicht notwendig]
 
 == 2023-11-06
 
