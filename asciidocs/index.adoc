@@ -778,7 +778,7 @@ Fahrzeug <|-- LKW
 @enduml
 ----
 
-Um dieses Datenmodell in die Datenbank zu übertragen, gibt es im Grund 2 Möglichkeiten.
+Um dieses Datenmodell in die Datenbank zu übertragen, gibt es im Grunde 2 Möglichkeiten.
 
 Möglichkeit 1: Table per Class -> für alle Unterklassen eine eigene Tabelle
 
@@ -796,6 +796,7 @@ Möglichkeit 1: Table per Class -> für alle Unterklassen eine eigene Tabelle
 |Achsen
 |===
 
+Implementierung in Quarkus:
 [source, java]
 ----
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
@@ -815,6 +816,7 @@ Möglichkeit 2: Single Table -> eine Tablle für die Basisklasse, wo auch die At
 |Delimiter
 |===
 
+Implementierung in Quarkus:
 [source, java]
 ----
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
