@@ -714,3 +714,113 @@ class Repository {
     EntityManager em;
 }
 ----
+
+Zustände eines Objekts:
+
+image::states-of-object.png[width=500]
+
+== 2023-11-13
+// Breinesberger Markus
+=== Arten von REST-Parameter
+
+* Path-Parameter
+[source,httprequest]
+----
+GET https://example.com/users/104
+----
+
+* Query-Parameter
+[source,httprequest]
+----
+GET https://example.com/users?size=10&offset=20
+----
+
+=== Versioning
+
+* Semantic Versioning (SemVer)
+
+** Format: Hauptversion.Nebenversion.Patch (z.B., 1.2.3)
+** 1. Stelle: Hauptversion (Major) für große Änderungen
+** 2. Stelle: Nebenversion (Minor) für neue, abwärtskompatible Funktionen
+** 3. Stelle: Patch für abwärtskompatible Fehlerbehebungen
+** Vorabversionen und Build-Informationen sind optional (z.B., 1.2.3-alpha+001)
+
+* Calendar Versioning (CalVer)
+
+** verwendet ein datumsbasiertes Versionsformat
+** Format: YYYY.MM.DD (z.B., 2023.01.15)
+** spiegelt das Veröffentlichungsdatum wider, um die Chronologie anzuzeigen
+** enthält keine Informationen über die Art der Änderungen
+** Konzentriert sich darauf, wann die Veröffentlichung erfolgt, anstatt den Typ der Änderungen anzugeben
+
+=== Vererbung in Datenbanken darstellen
+
+Als Beispiel ist eine Vererbung mit den Klassen PKW und LKW gegeben, die von der abstrakten Basisklasse Fahrzeug erben.
+
+[plantuml,vererbung-db]
+----
+@startuml
+abstract class Fahrzeug{
+- Leistung
+}
+
+class PKW{
+- Passagiere
+}
+
+class LKW{
+- Achsen
+}
+
+
+Fahrzeug <|-- PKW
+Fahrzeug <|-- LKW
+@enduml
+----
+
+Um dieses Datenmodell in die Datenbank zu übertragen, gibt es im Grunde 2 Möglichkeiten.
+
+Möglichkeit 1: Table per Class -> für alle Unterklassen eine eigene Tabelle
+
+|===
+|PKW
+
+|Leistung
+|Passagiere
+|===
+
+|===
+|LKW
+
+|Leistung
+|Achsen
+|===
+
+Implementierung in Quarkus:
+[source, java]
+----
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public class PKW {
+    // ...
+}
+----
+
+Möglichkeit 2: Single Table -> eine Tablle für die Basisklasse, wo auch die Attribute der Unterklassen enthalten sind
+
+|===
+|Fahrzeug
+
+|Leistung
+|Passagiere
+|Achsen
+|Delimiter
+|===
+
+Implementierung in Quarkus:
+[source, java]
+----
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+public class Fahrzeug {
+    // ...
+}
+----
