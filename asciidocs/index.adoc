@@ -399,7 +399,7 @@ Kunde "1" -- "*" Rechnung
 ----
 
 .\*-* Beziehung mit assoziativer Klasse, Variante 2
-[plantuml,cldvserd,svg]
+[plantuml,cldvserd3,svg]
 ----
 @startuml
 left to right direction
@@ -413,7 +413,7 @@ Rechnungsposition "*" --> "1" Produkt
 ==== ERD
 
 .n:m-Beziehung
-[plantuml,cldvserd3,svg]
+[plantuml,cldvserd4,svg]
 ----
 @startuml
 left to right direction
@@ -428,7 +428,7 @@ Rechnung }|--|{ Produkt
 ----
 
 .n:m-Beziehung aufgelöste (mit assoziativer Tabelle)
-[plantuml,cldvserd3,svg]
+[plantuml,cldvserd5,svg]
 ----
 @startuml
 left to right direction
@@ -828,3 +828,160 @@ public class Fahrzeug {
     // ...
 }
 ----
+
+== 2023-11-21
+Autor: Moritz Gruber
+
+=== Query mit 300 000 Zeilen
+* `paging`: Ergebniszeilen werden in Seiten mit XX Zeilen aufgeteilt.
+** offset: gibt an wie viele Elemente ausgelassen werden
+** limit: gibt an wie viele Elemente man ab dem offset bekommt
+** BSP:
+*** 1. Page hat Offset 0 und Limit 100
+*** 2. Page hat Offset 100 und Limit 100
+* `stream`: Man bekommt Ergebnisse Stück für Stück und nicht auf einmal. Somit kann man mit den bereits erhaltenen Daten gleich weiterarbeiten.
+
+=== Count in einer Query
+* BSP: Zählen der Männer eines Unternehmens
+
+[source, sql]
+----
+--Richtig
+SELECT count(*) FROM EMP WHERE lower(sex)='male';
+
+--Falsch
+SELECT * FROM emp;
+----
+
+IMPORTANT: Mit der Aggregatsfunktion count zählen und nicht im Code!
+
+=== Übung für WMC-Test
+
+==== Setup Project
+* Dependencies in der pom.xml hinzufügen
+** quarkus-resteasy-reactive-jackson
+** quarkus-resteasy-reactive
+** quarkus-hibernate-orm
+** quarkus-jdbc-derby
+** quarkus-smallrye-openapi
+** assertj-core
+** assertj-db
+
+* link:http://edufs.edu.htl-leonding.ac.at/~t.stuetz/download/nvs/scripts/[download-derbydb-and-jdk.sh] in das Repository kopieren und ausführen
+
+[source, bash]
+----
+chmod u+x download-derbydb-and-jdk.sh
+./download-derbydb-and-jdk.sh
+----
+
+* Inhalt der `application.properties` aus dem Projekt-Root soll in die /src/main/resources/application.properties kopiert werden
+
+* `derbydb-start.sh` ausführen um die DB zu starten
+
+[source, bash]
+----
+./derbydb-start.sh
+----
+
+* `datasource.txt` öffnen und Inhalt kopieren mit kbd:[STRG] + kbd:[A] und kbd:[STRG] + kbd:[C]
+
+* Neue Datasource mit `Import from Clipboard` erstellen
+
+==== Verzeichnisstruktur
+* main/java
+** at.htl.book.entity
+*** Author
+*** Book
+** at.htl.book.control
+*** AuthorRepository
+*** BookRepository
+
+* test/java
+** at.htl.book.entity
+*** AuthorTest
+*** BookTest
+** at.htl.book.control
+*** AuthorRepositoryTest
+*** BookRepositoryTest
+
+==== Entity
+[source, java]
+----
+@Entity
+@Table(name = "LIB_AUTHOR") //<.>
+@NamedQueries({ //<.>
+        @NamedQuery(
+                name = "Author.findAll",
+                query = "select a from Author a"
+        ),
+        @NamedQuery(
+                name = "Author.findByFirstName",
+                query = "select a from Author a where a.firstName = :FIRSTNAME"
+        )
+})
+public class Author {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //<.>
+    private Long id;
+    private String firstName;
+    private String lastName;
+
+    //constructors here
+
+    //getter and setter here
+
+    //toString() here
+}
+----
+<1> Hier wird der Name der Tabelle in der DB festgelegt
+<2> Hier werden Queries mit Namen definiert, welche später unter diesen Namen verwendet werden können
+<3> Wird zum Generieren der ID benötigt
+
+==== Repository
+[source, java]
+----
+@ApplicationScoped //<.>
+public class AuthorRepository {
+    @Inject
+    EntityManager em; //<.>
+
+    public Author save(Author author) {
+        return em.merge(author); //<.>
+    }
+}
+----
+<1> Es wird nur eine Instanz von AuthorRepository für die Dauer der gesamten Anwendung erstellt
+<2> Der EntityManager vereinfacht die Persistierung von Java Objekten in einer relationalen DB
+<3> Merge persistiert ein Java Objekt, falls es noch nicht existiert, falls es jedoch existiert wird es in der DB aktualisiert
+
+==== RepositoryTest
+[source, java]
+----
+@QuarkusTest //<.>
+class AuthorRepositoryTest {
+    @Inject
+    AuthorRepository authorRepository;
+
+    @Inject
+    AgroalDataSource ds; //<.>
+
+    @Test
+    @Transactional
+    void persistNewAuthor() {
+        Table authorTable = new Table(ds, "LIB_AUTHOR"); //<3>
+        output(authorTable).toConsole(); //<4>
+
+        var hemingway = new Author("Ernest", "Hemingway");
+        authorRepository.save(hemingway);
+
+        authorTable = new Table(ds, "LIB_AUTHOR"); //<3>
+        output(authorTable).toConsole(); //<4>
+    }
+}
+----
+<1> Damit Dependency-Injection in der Testklasse funktioniert
+<2> Die Datasource der DB wird durch Dependency-Injection injectet
+<3> Eine neue Table (assertj-db) des aktuellen Standes der Tabelle LIB_AUTHOR wird erstellt
+<4> Die authorTable wird auf der Konsole ausgegeben
+
