@@ -374,7 +374,7 @@ Im obigen Beispiel sind Person und Abteilung die Stammdaten, die Arbeitszeit ist
 ==== CLD
 
 .\*-* Beziehung
-[plantuml,cldvserd,svg]
+[plantuml,cldvserd1,svg]
 ----
 @startuml
 left to right direction
@@ -829,6 +829,114 @@ public class Fahrzeug {
 }
 ----
 
+
+== 2023-11-20
+//Bajtik Berg
+Möglichkeit 3: JOINED -> Attribute der Basisklasse in einer
+Tabelle und je eine Tabelle pro
+abgeleiteter Klasse (mit
+Diskriminator* DTYPE)
+
+__*Diskriminator = Unterscheidungsmerkmal__
+
+[source, java]
+----
+@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class Kfz {
+    // ...
+}
+----
+
+=== Panache
+* Hibernate ORM, am meisten verbreitetste JPA Implementierung
+* Erlaubt detailliert konfigurierbares und komplexes OR-Mapping
+* Jedoch nicht wirklich einfach zu verwenden weil ziemlich trivial
+
+Konfiguration der Data-Source (application.properties):
+
+[source,properties]
+----
+# configure your datasource
+quarkus.datasource.db-kind = derby
+quarkus.datasource.username = app
+quarkus.datasource.password = app
+quarkus.datasource.jdbc.url = jdbc:derby://localhost:1527/myDB;create=true
+# drop and create the database at startup (use `update` to only update the schema)
+quarkus.hibernate-orm.database.generation = drop-and-create
+----
+
+Entity-Klasse:
+
+[source,java]
+----
+@Entity
+public class Person {
+    @Id
+    private Long svnr;
+
+    private String firstname;
+    private String lastname;
+
+    public Person() {}
+    public Person(Long svnr, String firstname, String lastname) {
+        this.svnr = svnr;
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    // Getter und Setter
+
+}
+----
+
+Zugriff über EntityManager:
+
+[source,java]
+----
+@Path("/person")
+public class ExampleResource {
+    @Inject
+    EntityManager em;
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Person getPerson() {
+        return em.find(Person.class, 1L);
+    }
+
+    @GET
+    @Path("init")
+    @Transactional
+    public String init() {
+    Person p = new Person(1L, "Max", "Muster");
+        em.persist(p);
+        return "init ok";
+    }
+}
+----
+
+Zugriff mittels klassischem JPA:
+
+* Nachteile
+** Felder __private__
+** generierte Getter und Setter machen unnötig viel Code
+** Methoden für Standard-Zugriffe werden immer wieder neu implementiert
+(zB Count, ...)
+
+-> Panache macht das einfacher
+
+2 Patterns:
+
+* Active-Record-Pattern
+** Objekte enthalten Daten und Verhalten
+** Felder sind public, keine Getter/Setter notwendig
+** Getter/Setter optional für Validierungen, Umwandlungen ->
+werden auch bei Feldzugriff automatisch verwendet
+* Repository-Pattern
+** klassische Entity-Klasse erstellen, je nach Bedarf:
+*** klassische JPA-Entities oder
+*** Extend PanacheEntityBase (keine Getter/Setter) oder
+*** Extend PanacheEntity (default ID)
+=======
 == 2023-11-21
 Autor: Moritz Gruber
 
@@ -984,4 +1092,5 @@ class AuthorRepositoryTest {
 <2> Die Datasource der DB wird durch Dependency-Injection injectet
 <3> Eine neue Table (assertj-db) des aktuellen Standes der Tabelle LIB_AUTHOR wird erstellt
 <4> Die authorTable wird auf der Konsole ausgegeben
+
 
