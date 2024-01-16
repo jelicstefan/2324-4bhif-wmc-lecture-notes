@@ -1,0 +1,26 @@
+GET http://localhost:8080/vehicle/2
+
+###
+
+GET http://localhost:8080/vehicle
+
+###
+
+GET http://localhost:8080/vehicle/23
+Accept: application/json
+
+### custom json
+
+GET http://localhost:8080/vehicle/myjson
+Accept: application/json
+
+### custom response
+
+GET http://localhost:8080/vehicle/myresponse?no=2
+Accept: application/json
+
+### qute
+
+GET http://localhost:8080/hello?name=Susi
+
+###

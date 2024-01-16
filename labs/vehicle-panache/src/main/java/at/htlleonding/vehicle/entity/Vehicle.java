@@ -1,45 +1,11 @@
 package at.htlleonding.vehicle.entity;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-@NamedQueries({
-        @NamedQuery(
-                name = "Vehicle.findAll",
-                query = "from Vehicle"
-        ),
-        @NamedQuery(
-                name="Vehicle.findByBrand",
-                query =
-                        """
-                        select v
-                          from Vehicle v
-                         where v.brand = :brand
-                        """
-        ),
-        @NamedQuery(
-                name = "Vehicle.findByBrandWithPositionalParameter",
-                query =
-                        """
-                        select v
-                          from Vehicle v
-                         where v.brand = ?1
-                        """
-        )
-})
-@NamedNativeQueries({
-        @NamedNativeQuery(
-                name="Vehicle.findNativeAll",
-                query =
-                    """
-                    select v_id, v_brand, v_model
-                      from V_VEHICLE
-                    """,
-                resultClass = Vehicle.class
-        )
-})
 @Table(name = "V_VEHICLE")
 public class Vehicle {
 

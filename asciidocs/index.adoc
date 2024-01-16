@@ -936,7 +936,7 @@ werden auch bei Feldzugriff automatisch verwendet
 *** klassische JPA-Entities oder
 *** Extend PanacheEntityBase (keine Getter/Setter) oder
 *** Extend PanacheEntity (default ID)
-=======
+
 == 2023-11-21
 Autor: Moritz Gruber
 
@@ -1064,6 +1064,7 @@ public class AuthorRepository {
 <3> Merge persistiert ein Java Objekt, falls es noch nicht existiert, falls es jedoch existiert wird es in der DB aktualisiert
 
 ==== RepositoryTest
+
 [source, java]
 ----
 @QuarkusTest //<.>
@@ -1093,4 +1094,44 @@ class AuthorRepositoryTest {
 <3> Eine neue Table (assertj-db) des aktuellen Standes der Tabelle LIB_AUTHOR wird erstellt
 <4> Die authorTable wird auf der Konsole ausgegeben
 
+== 2023-12-18
 
+=== JPA-Queries
+
+* NamedQueries
+* TypedQueries
+* NativeQueries
+
+
+// --
+
+* JP-QL - Queries
+* SQL - Queries -> NativeQueries
+
+
+== 2024-01-08
+
+* Think your product
+
+== 2024-01-09
+
+* Stundentausch wegen "Think your product".
+
+
+== 2024-01-15
+
+=== Panache
+
+* https://quarkus.io/guides/hibernate-orm-panache[Quarkus Panache - Simplified Hibernate ORM with Panache^]
+
+image::panache-overview.png[]
+
+
+==== Transaktionen
+
+* keine Trnsaktionen im Repository
+
+
+=== Qute
+
+* https://quarkus.io/guides/qute-reference

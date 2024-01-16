@@ -1,6 +1,8 @@
 package at.htlleonding.vehicle.boundary;
 
+import at.htlleonding.vehicle.control.VehicleRepository;
 import at.htlleonding.vehicle.entity.Vehicle;
+import jakarta.inject.Inject;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
@@ -15,6 +17,10 @@ import java.util.List;
 @Path("/vehicle")
 public class VehicleResource {
 
+    @Inject
+    VehicleRepository vehicleRepository;
+
+
     @GET
     @Path("{id}")
     @Produces({
@@ -22,7 +28,7 @@ public class VehicleResource {
             , MediaType.APPLICATION_XML
     })
     public Vehicle find(@PathParam("id") long id) {
-        return new Vehicle("Opel " + id, "Commodore");
+        return vehicleRepository.findById(id);
     }
 
     @GET
@@ -30,9 +36,7 @@ public class VehicleResource {
             MediaType.APPLICATION_JSON
     })
     public List<Vehicle> findAll() {
-        List<Vehicle> all = new ArrayList<>();
-        all.add(find(42));
-        return all;
+        return vehicleRepository.listAll();
     }
 
     @GET
