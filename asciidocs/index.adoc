@@ -1135,3 +1135,45 @@ image::panache-overview.png[]
 === Qute
 
 * https://quarkus.io/guides/qute-reference
+
+==== Übung Qute
+
+** Erstellen Sie zu Ihrem Microprojekt eine HTML-Seite zum Upload einer Tabellenzeile
+
+** Erstellen Sie weiters ein Qute-Template (type-safe), dass diese Tabelle als List mit Bildern ausgibt (https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Card[Cards^])
+
+** Verwenden Sie https://www.webjars.org/[webjars^], um js-Libraries einzubinden, zB https://htmx.org/[htmx^] oder https://picnicss.com/[picnic]
+
+** https://www.svgrepo.com/collections/[SVG-Icons und Grafiken^]
+
+.pom.xml
+[source,xml]
+----
+<dependency>
+  <groupId>org.webjars.npm</groupId>
+  <artifactId>picnic</artifactId>
+  <version>7.1.0</version>
+</dependency>
+----
+
+..html-file
+[source,xml]
+----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="10">
+    <link rel="stylesheet" href="webjars/picnic/7.1.0/picnic.min.css">
+    <link rel="icon" href="/img/favicon.ico">
+    <title>SVG-Animator</title>
+...
+----
+
+** https://quarkus.io/guides/qute-reference[Qute Reference Guide]
+
+
+== WebSockets
+
+* siehe vehicle-panache
