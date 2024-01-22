@@ -1171,6 +1171,7 @@ image::panache-overview.png[]
 ...
 ----
 
+** https://htl-leonding-college.github.io/quarkus-lecture-notes/qute.html
 ** https://quarkus.io/guides/qute-reference[Qute Reference Guide]
 
 
