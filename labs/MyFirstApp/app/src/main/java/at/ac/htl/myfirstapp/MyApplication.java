@@ -10,6 +10,7 @@ import dagger.hilt.android.HiltAndroidApp;
 public class MyApplication extends Application {
 
     private static final String TAG = MyApplication.class.getSimpleName();
+
     public MyApplication() {
         Log.i(TAG, "juhu, myapp");
     }

@@ -10,37 +10,47 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import at.ac.htl.myfirstapp.ui.theme.MyFirstAppTheme
+import dagger.hilt.android.qualifiers.ActivityContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class MainView {
-}
 
-fun compose(activity: ComponentActivity) {
-    activity.setContent {
-        MyFirstAppTheme {
-            // A surface container using the 'background' color from the theme
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                Greeting("Android")
+    @Inject
+    constructor(){
+
+    }
+
+
+    fun compose(activity: ComponentActivity) {
+        activity.setContent {
+            MyFirstAppTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Greeting("Android")
+                }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    @Composable
+    fun Greeting(name: String, modifier: Modifier = Modifier) {
+        Text(
+            text = "Hello $name!",
+            modifier = modifier
+        )
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyFirstAppTheme {
-        Greeting("Android")
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        MyFirstAppTheme {
+            Greeting("Android")
+        }
     }
 }
 
