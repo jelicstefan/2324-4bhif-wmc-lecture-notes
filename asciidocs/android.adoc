@@ -31,17 +31,27 @@ image::android-life-cycle.png[]
 * https://developer.android.com/training/dependency-injection/hilt-android
 
 
+* In Hilt Constructor - Injection
+* In Quarkus eher field Injection
+
+=== MVVM
+
+* https://cs193p.sites.stanford.edu/2023
+
+* https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/l3.pdf[Foliensatz MVVM]
 
 
+* https://redux.js.org/understanding/thinking-in-redux/three-principles[Three Principles]
+** Single source of truth
+** State is read-only
+** Changes are made with pure functions
 
 
+* https://rxmarbles.com/#map
 
+image::android-obervables.png[]
 
-
-
-
-
-
+* https://github.com/caberger/swift-tutorial/blob/master/examples/android/hello-world/application/app/build.gradle.kts
 
 
 
