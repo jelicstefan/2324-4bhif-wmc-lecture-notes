@@ -1,0 +1,49 @@
+= 23/24 4bhif wmc - Android Lecture Notes
+ifndef::imagesdir[:imagesdir: images]
+:icons: font
+:experimental:
+:sectnums:
+:toc:
+ifdef::backend-html5[]
+
+// https://fontawesome.com/v4.7.0/icons/
+icon:file-text-o[link=https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes/main/asciidocs/{docname}.adoc] ‏ ‏ ‎
+icon:github-square[link=https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes] ‏ ‏ ‎
+icon:home[link=http://edufs.edu.htl-leonding.ac.at/~t.stuetz/hugo/2021/01/lecture-notes/]
+endif::backend-html5[]
+
+== 2024-11-23
+
+image::mvc.png[]
+
+* Wir verwenden Kotlin für das Frontend
+* Für die Business Logik wird Java verwendet.
+
+
+=== Activity Life Cycle
+
+* https://developer.android.com/guide/components/activities/activity-lifecycle
+
+image::android-life-cycle.png[]
+
+=== DI
+
+* https://developer.android.com/training/dependency-injection/hilt-android
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1178,3 +1178,17 @@ image::panache-overview.png[]
 == WebSockets
 
 * siehe vehicle-panache
+
+include::android.adoc
+
+
+
+
+
+
+
+
+
+
+
+
