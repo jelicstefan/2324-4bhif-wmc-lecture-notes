@@ -53,6 +53,7 @@ image::android-obervables.png[]
 
 * https://github.com/caberger/swift-tutorial/blob/master/examples/android/hello-world/application/app/build.gradle.kts
 
+image::android-pure-functions.png[]
 
 
 
