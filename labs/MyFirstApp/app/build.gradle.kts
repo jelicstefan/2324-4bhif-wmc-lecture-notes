@@ -71,8 +71,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     // RxJava
     implementation("io.reactivex.rxjava3:rxjava:3.1.8")
