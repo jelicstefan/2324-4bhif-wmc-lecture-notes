@@ -36,9 +36,13 @@ image::android-life-cycle.png[]
 
 === MVVM
 
-* https://cs193p.sites.stanford.edu/2023
+.source: https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/l2.pdf[Stanford CS193p (2023)]
+image::android-mvvm.png[]
 
-* https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/l3.pdf[Foliensatz MVVM]
+
+* https://cs193p.sites.stanford.edu/2023[Stanford CS193p - Developing Apps for iOS - Videomitschnitt]
+
+* https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/l1.pdf[Stanford CS193p - Developing Apps for iOS - Foliensatz MVVM]
 
 
 * https://redux.js.org/understanding/thinking-in-redux/three-principles[Three Principles]
