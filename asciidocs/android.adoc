@@ -12,7 +12,7 @@ icon:github-square[link=https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture
 icon:home[link=http://edufs.edu.htl-leonding.ac.at/~t.stuetz/hugo/2021/01/lecture-notes/]
 endif::backend-html5[]
 
-== 2024-11-23
+== 2024-01-23
 
 image::mvc.png[]
 
@@ -59,6 +59,133 @@ image::android-obervables.png[]
 
 image::android-pure-functions.png[]
 
+== 2024-01-30
 
+Mit subject.onNext wird dem Observer ein neuer Wert zum "Beobachten" gegeben
 
+.link:../labs/MyFirstApp/app/src/main/java/at/ac/htl/myfirstapp/model/Store.java[Store^]
+[source, java]
+----
+public void next(Consumer<Model> recipe) {
+    Model model = mapper.clone(subject.getValue()); //<1>
+    recipe.accept(model); //<2>
+    subject.onNext(model); //<3>
+}
+----
 
+<1> hier wird das derzeitige Model <<deep_copy,tief kopiert>>
+<2> Das Model wird nun durch einen Consumer, der bei Aufruf der Methode mitgegeben wird, verändert.
+<3> Nun bekommt jeder Observer durch die Methode onNext das neue Model.
+
+[#deep_copy]
+=== Deep Copy
+
+Bei einem Deep Copy (= tiefer Kopie) geht es darum, ein Object zu klonen, ohne referenzen des alten objects zu übertragen.
+
+image::shallow-copy-deep-copy.png[]
+
+Ein Deep Copy ist im Vergleich zu einem <<shallow_copy,Shallow Copy>> sehr Ressourcenaufwendig, da durch jede Referenz auf ein anderes Objekt das andere Objekt selbst tief kopiert werden muss.
+
+Wenn man ein Deep Copy durch JSON serialisierung implementiert, schaut dies folgendermaßen aus:
+
+.link:../labs/MyFirstApp/app/src/main/java/at/ac/htl/myfirstapp/model/ModelMapper.java[ModelMapper^]
+[source, java]
+----
+public class ModelMapper<T> {
+    ObjectMapper mapper = new ObjectMapper(); //<1>
+    Class<? extends T> classType;
+
+    public ModelMapper(Class<? extends T> classType) {
+        this.classType = classType;
+    }
+
+    public T clone(T model) {
+        return fromResource(toResource(model)); //<2>
+    }
+
+    public byte[] toResource(T model) {
+        try {
+            return mapper.writeValueAsBytes(model); //<3>
+        } catch (JsonProcessingException e) {
+            throw new CompletionException(e);
+        }
+    }
+
+    public T fromResource(byte[] bytes) {
+        try {
+            return mapper.readValue(bytes, classType); //<4>
+        } catch (IOException e) {
+            throw new CompletionException(e);
+        }
+    }
+}
+----
+
+<1> Hier wird ein ObjectMapper von Jackson für die durchführung der JSON initialisierung erstellt
+<2> Wenn man Objekt zuerst zu einem String macht und den String dann wieder zu einem Objekt macht ist das resultat ein neues Objekt, das von den Referenzen nichts mit dem anfangs Objekt zu tun hat
+<3> Hier wird das Objekt zu einem String (ByteArray) gemacht
+<4> Hier wird der String (ByteArray) wieder zu einem Objekt gemacht. Um nun auch auf die richtige Klasse zu kommen wird dem ObjectMapper eine Klasse mitgegeben die im Konstruktor des ModelMappers übergeben worden ist.
+
+[#shallow_copy]
+=== Shallow Copy
+
+Ein Shallow Copy (= seichte Kopie) geht nicht so "tief" in den Kopie vorgang, wie ein <<deep_copy,Deep Copy>> und macht nur ein neues Objekt mit den Werten des alten Objekts verwendet dabei aber die gleichen referenzen wie das alte Objekt auf weitere Objekte
+
+=== Composable
+
+In einer Methode die mit @Composable annotiert ist, definiert man eine View.
+
+.link:../labs/MyFirstApp/app/src/main/java/at/ac/htl/myfirstapp/ui/layout/MainView.kt[MainView^]
+[source, kotlin]
+----
+@Composable
+fun Greeting(store: Store, modifier: Modifier = Modifier) {
+    val state = store.subject.subscribeAsState(initial = Model())
+    Column { //<1>
+        Text( //<2>
+            text = "Hello ${state.value.greeting}!",
+            modifier = modifier
+        )
+        Text(text = "Zweite Zeile")
+        Button(onClick = { //<3>
+            Log.i(TAG, "geclickt")
+            store.next { it.greeting = "I was clicked" }
+        }) {
+            Text(text = "save") //<4>
+        }
+    }
+}
+----
+
+In einer solchen Composable Methode kann man auf Composables wie Column oder Button zugreifen.
+
+<1> Eine Column definiert, eine Vertikale Liste an Composables
+<2> Mit einem Text kann man in seine View durch das Attribut text einen Text einbinden
+<3> Ein Button definiert einen Knopf, auf den man drücken kann, außerdem kann man auch gleich mit dem Attribut onClick eine Funktion schreiben die ausgeführt wird, wenn man den Knopf drückt
+<4> In einem Button kann man dann weitere Composables benutzen wie zum Beispiel einen Text der im Button angezeigt wird.
+
+Diese View würde so ausschauen:
+
+image:composable-bsp.png[]
+
+=== Preview
+
+Um zu sehen, wie eine View ausschaut, ohne die ganze App zu starten, kann man eine Preview Composable machen:
+
+.link:../labs/MyFirstApp/app/src/main/java/at/ac/htl/myfirstapp/ui/layout/MainView.kt[MainView^]
+[source, kotlin]
+----
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    val store = Store()
+
+    MyFirstAppTheme {
+        Greeting(store)
+    }
+}
+----
+
+mit dieser kann man sich ganz einfach in der IDE anzeigen lassen wie eine solche View, in diesem Fall Greeting, ausschaut.
+
+image:preview.png[]
