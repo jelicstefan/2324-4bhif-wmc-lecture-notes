@@ -189,3 +189,6 @@ fun GreetingPreview() {
 mit dieser kann man sich ganz einfach in der IDE anzeigen lassen wie eine solche View, in diesem Fall Greeting, ausschaut.
 
 image:preview.png[]
+
+
+
