@@ -1190,8 +1190,21 @@ include::android.adoc
 
 
 
+== 2024-02-12
 
+=== MQTT
 
+* Broker (Verteiler) Mosquitto
+
+* https://www.youtube.com/watch?v=SslVWiX8P2A
+* https://www.youtube.com/watch?v=dTTfygU61_E
+
+==== Übung OwnTracks
+
+* Installieren Sie die App OwnTracks
+** Senden Sie Ihre Positionsdaten an den Server vm90 im topic `owntracks/2024_4bhif/nachname`
+** Erstellen Sie einen Quarkus Client mit Qute, der Ihre momentane Position in einer OSM-Map anzeigt
+** Speichern Sie in der Datenbank Ihre Positions-Historie
 
 
 
