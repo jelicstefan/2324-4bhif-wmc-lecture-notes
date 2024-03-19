@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity;
 
 import javax.inject.Inject;
 
+import at.ac.htl.myfirstapp.business.Logger;
 import at.ac.htl.myfirstapp.model.Store;
 import at.ac.htl.myfirstapp.ui.layout.MainView;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -23,16 +24,27 @@ public class MainActivity extends ComponentActivity {
     @Inject
     Store store;
 
+    @Inject
+    Logger logger;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        logger.subscribe();
         Log.i(TAG, "onCreate");
         mainView.compose(this);
 
-        store.next(consumerModel -> consumerModel.greeting = "mit consumer");
+        store.onNext(consumerModel -> consumerModel.greeting = "mit consumer");
         Disposable disposable = store.subject
-                .map(modelGreeting -> modelGreeting.greeting.toUpperCase())
+                .map(model -> model.greeting)
+                .map(greeting -> greeting.toUpperCase())
+                .distinctUntilChanged()
                 .subscribe(greeting -> Log.i(TAG, greeting));
+
+        store.onNext(model -> {
+            model.firstName = "John";
+            model.lastName = "Doe";
+        } );
     }
 }
 

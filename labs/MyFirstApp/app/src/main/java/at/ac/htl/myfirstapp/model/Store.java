@@ -19,7 +19,7 @@ public class Store {
         mapper = new ModelMapper<>(Model.class);
     }
 
-    public void next(Consumer<Model> recipe) {
+    public void onNext(Consumer<Model> recipe) {
         Model model = mapper.clone(subject.getValue());
         recipe.accept(model);
         subject.onNext(model);

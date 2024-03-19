@@ -1207,5 +1207,45 @@ include::android.adoc
 ** Speichern Sie in der Datenbank Ihre Positions-Historie
 
 
+== 2024-03-19
+
+=== State and Jetpack Compose
+
+* https://developer.android.com/jetpack/compose/state[^]
+
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mymWGMy9pYI?si=FyJcSDGSALbkCZrh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+++++
+
+=== ViewModelProvider
+
+* https://developer.android.com/reference/android/arch/lifecycle/ViewModelProvider[ViewModelProviders^]
+
+=== MutableLiveData
+
+* https://developer.android.com/reference/android/arch/lifecycle/MutableLiveData[MutableLiveData^]
+
+=== Promise
+
+* promise … (Versprechen)
+** Der return-Wert einer Funktion ist noch nicht vorhanden, aber er ist versprochen (in Java "Future")
+** bei await würde ich blocken. Das will ich nicht daher erstelle ich eine Kette von Funktionen
+** zB Sensor sendet Wert (Fahrenheit) -> Umrechnung in Grad Celsius -> formatierter String
+
+* Subject ist eine Erweiterung einer Observablen
+
+** mit onNext (oder next) wird ein Wert (Marble) in das BehaviorSubject (Röhre) geschickt
+** Ein *State* übersetzt einen Wert des BehaviorSubjects (RxJava) in die Welt von Jetpack Compose
+
+* https://rxjs.dev/guide/observable[Observable^]
+
+* https://rxjs.dev/guide/subject[Subject]
+
+
+== Compose
+
+* dp ... device points, Vielfaches von mm
+* sp ... für Text / Schrift
+
 
 

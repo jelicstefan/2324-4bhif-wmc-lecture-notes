@@ -76,7 +76,7 @@ dependencies {
 
     // RxJava
     implementation("io.reactivex.rxjava3:rxjava:3.1.8")
-    implementation("androidx.compose.runtime:runtime-rxjava3:1.5.4")
+    implementation("androidx.compose.runtime:runtime-rxjava3:1.6.2")
 
     // Jackson
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
