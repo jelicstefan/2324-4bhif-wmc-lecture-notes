@@ -1209,6 +1209,15 @@ include::android.adoc
 
 == 2024-03-19
 
+image::single-source-of-truth.png[]
+
+image::veiw-model.png[]
+
+image::behavior-subject.png[]
+
+image::rx-observables.png[]
+
+
 === State and Jetpack Compose
 
 * https://developer.android.com/jetpack/compose/state[^]
@@ -1219,9 +1228,13 @@ include::android.adoc
 
 === ViewModelProvider
 
+* Ist bei Verwendung eines BehaviorSubjects obsolet
+
 * https://developer.android.com/reference/android/arch/lifecycle/ViewModelProvider[ViewModelProviders^]
 
 === MutableLiveData
+
+* Ist bei Verwendung eines BehaviorSubjects obsolet
 
 * https://developer.android.com/reference/android/arch/lifecycle/MutableLiveData[MutableLiveData^]
 
