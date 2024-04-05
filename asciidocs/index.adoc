@@ -1179,7 +1179,7 @@ image::panache-overview.png[]
 
 * siehe vehicle-panache
 
-include::android.adoc
+include::android.adoc[]
 
 
 
