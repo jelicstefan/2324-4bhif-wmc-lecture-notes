@@ -2,17 +2,19 @@ import {Component, inject, OnInit} from '@angular/core';
 import {StoreService} from "../../services/store.service";
 import {distinctUntilChanged, map} from "rxjs";
 import {Todo} from "../../model";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: 'app-todo',
   standalone: true,
-  imports: [],
+  imports: [
+    AsyncPipe
+  ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css'
 })
 export class TodoComponent implements OnInit {
     //store = inject(StoreService).store
-  protected todos!: Todo[]
   viewModel = inject(StoreService)
     .store
     .pipe(
@@ -21,7 +23,6 @@ export class TodoComponent implements OnInit {
     )
 
   ngOnInit() {
-    this.viewModel.subscribe(todos => this.todos = todos)
       // this.store.pipe(
       //   map(model => model.todos),
       //   distinctUntilChanged()
