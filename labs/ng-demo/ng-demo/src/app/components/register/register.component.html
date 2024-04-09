@@ -1,0 +1,27 @@
+<form>
+  <fieldset>
+    <label>
+      First name
+      <input #name
+        value="{{ store.value.name }}"
+        placeholder="First name"
+        autocomplete="given-name"
+             (keyup)="onNameChanged(name.value)"
+      />
+    </label>
+    <label>
+      Email
+      <input
+        type="email"
+        value="{{ store.value.email }}"
+        placeholder="Email"
+        autocomplete="email"
+      />
+    </label>
+  </fieldset>
+
+  <input
+    type="submit"
+    value="Subscribe"
+  />
+</form>
