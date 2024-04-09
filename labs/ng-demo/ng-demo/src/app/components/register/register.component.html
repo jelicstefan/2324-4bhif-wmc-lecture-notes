@@ -11,11 +11,12 @@
     </label>
     <label>
       Email
-      <input
+      <input #email
         type="email"
         value="{{ store.value.email }}"
         placeholder="Email"
         autocomplete="email"
+        (keyup)="onEmailChanged(email.value)"
       />
     </label>
   </fieldset>
