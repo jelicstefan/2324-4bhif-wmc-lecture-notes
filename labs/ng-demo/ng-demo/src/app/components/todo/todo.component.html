@@ -1,1 +1,9 @@
-<p>todo works!</p>
+<p>todo works!({{todos.length}})</p>
+
+<ol>
+  @for (todo of todos; track todo.title) {
+    <li>{{ todo.title }}</li>
+  } @empty {
+    <li>There are no items.</li>
+  }
+</ol>

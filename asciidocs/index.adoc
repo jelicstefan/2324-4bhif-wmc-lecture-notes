@@ -1261,4 +1261,8 @@ image::rx-observables.png[]
 * sp ... für Text / Schrift
 
 
+== 2024-04-09 Angualar
 
+https://picocss.com/
+
+https://immerjs.github.io/immer/

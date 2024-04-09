@@ -1,16 +1,23 @@
 package at.htlleonding.vehicle.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "V_CUSTOMER")
+@Table(name = "V_CUSTOMER", uniqueConstraints = @UniqueConstraint(columnNames = {"dob", "name"}))
 public class Customer {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
+    @Column(name = "C_NAME", length = 50)
     private String name;
+
+    @PastOrPresent
     private LocalDate dob;
 
     public Customer() {
