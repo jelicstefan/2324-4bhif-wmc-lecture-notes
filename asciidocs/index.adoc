@@ -1138,13 +1138,13 @@ image::panache-overview.png[]
 
 ==== Übung Qute
 
-** Erstellen Sie zu Ihrem Microprojekt eine HTML-Seite zum Upload einer Tabellenzeile
+* Erstellen Sie zu Ihrem Microprojekt eine HTML-Seite zum Upload einer Tabellenzeile
 
-** Erstellen Sie weiters ein Qute-Template (type-safe), dass diese Tabelle als List mit Bildern ausgibt (https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Card[Cards^])
+* Erstellen Sie weiters ein Qute-Template (type-safe), dass diese Tabelle als List mit Bildern ausgibt (https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Card[Cards^])
 
-** Verwenden Sie https://www.webjars.org/[webjars^], um js-Libraries einzubinden, zB https://htmx.org/[htmx^] oder https://picnicss.com/[picnic]
+* Verwenden Sie https://www.webjars.org/[webjars^], um js-Libraries einzubinden, zB https://htmx.org/[htmx^] oder https://picnicss.com/[picnic]
 
-** https://www.svgrepo.com/collections/[SVG-Icons und Grafiken^]
+* https://www.svgrepo.com/collections/[SVG-Icons und Grafiken^]
 
 .pom.xml
 [source,xml]
@@ -1169,10 +1169,12 @@ image::panache-overview.png[]
     <link rel="icon" href="/img/favicon.ico">
     <title>SVG-Animator</title>
 ...
+</head>
+</html>
 ----
 
-** https://htl-leonding-college.github.io/quarkus-lecture-notes/qute.html
-** https://quarkus.io/guides/qute-reference[Qute Reference Guide]
+* https://htl-leonding-college.github.io/quarkus-lecture-notes/qute.html
+* https://quarkus.io/guides/qute-reference[Qute Reference Guide]
 
 
 == WebSockets
@@ -1261,7 +1263,7 @@ image::rx-observables.png[]
 * sp ... für Text / Schrift
 
 
-== 2024-04-09 Angualar
+== 2024-04-09 Angular Demo App
 
 https://picocss.com/
 
