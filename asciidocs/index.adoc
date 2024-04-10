@@ -1268,3 +1268,19 @@ image::rx-observables.png[]
 https://picocss.com/
 
 https://immerjs.github.io/immer/
+
+
+.shell-commands
+----
+npm install @angular/cli
+npx ng n ng-demo
+cd ng-demo
+webstorm .
+npm start
+npx ng g s services/store
+npx ng g c components/register
+npm install immer
+ng g s services/todo
+ng g c components/to
+ng g c components/todo
+----
