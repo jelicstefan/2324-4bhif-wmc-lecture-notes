@@ -1284,3 +1284,16 @@ ng g s services/todo
 ng g c components/to
 ng g c components/todo
 ----
+
+== 2024-04-16 Angular HttpClient
+
+* http-client hat fetch gegenüber den Vorteil, dass gute Infrastruktur wir JWT support und middleware zum debuggen
+
+
+
+
+
+
+
+
+
