@@ -3,6 +3,7 @@ import {Todo} from "../model/todo";
 import {set} from "../model/model";
 import {HttpClient} from "@angular/common/http";
 import {StoreService} from "./store.service";
+import {lastValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +22,25 @@ export class TodoService {
   //   })
   // }
 
-  async findAll() {
-    this.httpClient.get<Todo[]>("https://jsonplaceholder.typicode.com/todos")
-      .subscribe(todos => {
-        set(model => {
-          model.todos = todos
-        })
-      })
-    console.log("findAll: ",this.store.value.todos.length)
+  // async findAll() {
+  //   this.httpClient.get<Todo[]>("https://jsonplaceholder.typicode.com/todos")
+  //     .subscribe(todos => {
+  //       set(model => {
+  //         model.todos = todos
+  //       })
+  //     })
+  //   console.log("findAll: ",this.store.value.todos.length)
+  // Problem: console.log wird aufgerufen, sobald request abgesetzt ist und nicht
+  //          erst nachdem Daten erhalten wurden -> typischer Fehler in Angular
 
+  async findAll() {
+    const todos = await lastValueFrom(
+      this.httpClient.get<Todo[]>("https://jsonplaceholder.typicode.com/todos")
+    )
+    set(model => {
+      model.todos = todos
+    })
+    console.log("findAll: ", this.store.value.todos.length)
   }
 
 }
