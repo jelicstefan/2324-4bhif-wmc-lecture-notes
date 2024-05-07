@@ -2,6 +2,7 @@ package at.htl.todo;
 
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.ComponentActivity;
 
@@ -14,6 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class MainActivity extends ComponentActivity {
 
+    static final String TAG = MainActivity.class.getSimpleName();
+
     @Inject
     Config config;
 
@@ -24,6 +27,7 @@ public class MainActivity extends ComponentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         var url = config.getValue("json.placeholder.baseurl", String.class);
+        Log.i(TAG,url);
         mainUiBuilder.buildContent(this);
     }
 }

@@ -1,11 +1,11 @@
 package at.htl.todo.model;
 
-public record Todo(
-        Long userId,
-        Long id,
-        String title,
-        boolean completed
-) { }
+public class Todo {
+        public Long userId;
+        public Long id;
+        public String title;
+        public boolean completed;
+}
 
 /**
  * userId	1
@@ -13,3 +13,4 @@ public record Todo(
  * title	"delectus aut autem"
  * completed	false
  */
+
