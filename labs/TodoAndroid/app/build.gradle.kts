@@ -47,9 +47,16 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/INDEX.LIST"
+            excludes += "META-INF/DEPENDENCIES"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/NOTICE.md"
+            excludes += "META-INF/DEPENDENCIES.txt"
         }
     }
 }
+
+
 
 dependencies {
 
@@ -69,8 +76,23 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
+
+    // RxJava
+    implementation("io.reactivex.rxjava3:rxjava:3.1.8")
+    //implementation("io.reactivex.rxjava3:rxandroid:3.1.8")
+    implementation("androidx.compose.runtime:runtime-rxjava3:1.6.2")
+
+    // Jackson
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+
+    // Resteasy
+    implementation("org.jboss.resteasy:resteasy-client:6.2.8.Final")
+    //implementation("org.eclipse.microprofile.config:microprofile-config-api:3.1") // for application.properties config loader
+    implementation("io.smallrye.config:smallrye-config:3.4.4")
+
 
 }
 
