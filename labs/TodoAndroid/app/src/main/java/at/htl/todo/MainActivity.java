@@ -10,6 +10,7 @@ import org.eclipse.microprofile.config.Config;
 
 import javax.inject.Inject;
 
+import at.htl.todo.model.TodoService;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -23,11 +24,14 @@ public class MainActivity extends ComponentActivity {
     @Inject
     MainUiBuilder mainUiBuilder;
 
+    @Inject
+    TodoService todoService;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         var url = config.getValue("json.placeholder.baseurl", String.class);
-        Log.i(TAG,url);
+        todoService.getAll();
         mainUiBuilder.buildContent(this);
     }
 }

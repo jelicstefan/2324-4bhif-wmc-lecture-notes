@@ -9,6 +9,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.State
+import androidx.compose.runtime.rxjava3.subscribeAsState
+import at.htl.todo.model.Model
+import at.htl.todo.model.ModelStore
 import at.htl.todo.ui.theme.TodoAndroidTheme
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,6 +22,9 @@ class MainUiBuilder  {
 
     @Inject constructor(){}
 
+    @Inject
+    lateinit var modelStore: ModelStore
+
     fun buildContent(activity: ComponentActivity) {
         activity.setContent {
             TodoAndroidTheme {
@@ -26,7 +33,8 @@ class MainUiBuilder  {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    val state = modelStore.pipe.subscribeAsState(initial = Model())
+                    Greeting(state)
                 }
             }
         }
@@ -35,9 +43,11 @@ class MainUiBuilder  {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(state: State<Model>, modifier: Modifier = Modifier) {
+
+
     Text(
-        text = "Hello $name!",
+        text = "Hello ${state.value.todos.size}!",
         modifier = modifier
     )
 }
@@ -46,7 +56,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     TodoAndroidTheme {
-        Greeting("Android")
+        //Greeting("Android")
     }
 }
 
