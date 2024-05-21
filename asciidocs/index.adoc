@@ -1290,6 +1290,12 @@ ng g c components/todo
 * http-client hat fetch gegenüber den Vorteil, dass gute Infrastruktur wir JWT support und middleware zum debuggen
 
 
+== 2024-05-21 Android
+
+* https://github.com/caberger/android[Repo Prof. Aberger Android^]
+
+
+
 
 
 
