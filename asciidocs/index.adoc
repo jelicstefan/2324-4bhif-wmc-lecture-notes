@@ -1298,6 +1298,12 @@ ng g c components/todo
 * https://github.com/coil-kt/coil
 * https://github.com/bumptech/glide
 
+== 2024-05-27 Filter, Interceptors, keycloak
+
+image::http-filter.png[]
+
+
+
 .docker-compose.yaml
 [source,yaml]
 ----
