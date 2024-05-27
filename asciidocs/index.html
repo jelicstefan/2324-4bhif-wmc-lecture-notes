@@ -684,6 +684,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_compose">6. Compose</a></li>
 <li><a href="#_2024_04_09_angular_demo_app">7. 2024-04-09 Angular Demo App</a></li>
+<li><a href="#_2024_04_16_angular_httpclient">8. 2024-04-16 Angular HttpClient</a></li>
+<li><a href="#_2024_05_21_android">9. 2024-05-21 Android</a></li>
 </ul>
 </li>
 </ul>
@@ -3319,10 +3321,111 @@ ng g c components/todo</pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2024_04_16_angular_httpclient">8. 2024-04-16 Angular HttpClient</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>http-client hat fetch gegenüber den Vorteil, dass gute Infrastruktur wir JWT support und middleware zum debuggen</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2024_05_21_android">9. 2024-05-21 Android</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/caberger/android" target="_blank" rel="noopener">Repo Prof. Aberger Android</a></p>
+</li>
+<li>
+<p><a href="https://github.com/coil-kt/coil" class="bare">https://github.com/coil-kt/coil</a></p>
+</li>
+<li>
+<p><a href="https://github.com/bumptech/glide" class="bare">https://github.com/bumptech/glide</a></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yaml"><span style="color:#606">version</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">3.9</span><span style="color:#710">&quot;</span></span>
+<span style="color:#606">services</span>:
+  <span style="color:#606">postgres</span>:
+    <span style="color:#606">container_name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">postgres_keycloak</span></span>
+    <span style="color:#606">image</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">postgres:15.3</span></span>
+    <span style="color:#606">volumes</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">./db-data:/var/lib/postgresql/data/</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">./sql:/docker-entrypoint-initdb.d/:ro</span></span>
+    <span style="color:#606">env_file</span>:
+     - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">./keycloak-postgres.env</span></span>
+    <span style="color:#606">networks</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">keycloak</span></span>
+    <span style="color:#606">ports</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">5432:5432</span><span style="color:#710">&quot;</span></span>
+  <span style="color:#606">pgadmin</span>:
+    <span style="color:#606">container_name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">pgadmin_keycloak</span></span>
+    <span style="color:#606">image</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">dpage/pgadmin4:7.5</span></span>
+    <span style="color:#606">env_file</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">./keycloak-postgres.env</span></span>
+    <span style="color:#606">ports</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">5050:80</span><span style="color:#710">&quot;</span></span>
+    <span style="color:#606">networks</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">keycloak</span></span>
+
+  <span style="color:#606">keycloak</span>:
+    <span style="color:#606">container_name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">keycloak</span></span>
+    <span style="color:#606">image</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">quay.io/keycloak/keycloak:23.0.3</span></span>
+    <span style="color:#606">restart</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">always</span></span>
+    <span style="color:#606">command</span>:
+<span style="color:#777">#     - mv /usr/lib/jvm/java-17-openjdk-17.0.9.0.9-2.el9.x86_64/lib/security/cacerts /usr/lib/jvm/java-17-openjdk-17.0.9.0.9-2.el9.x86_64/lib/security/cacerts.bla</span>
+     - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">start --optimized</span></span>
+     <span style="color:#777">#- &quot;-Dkeycloak.import=/opt/jboss/keycloak/imports/quarkus-realm.json&quot;</span>
+    <span style="color:#606">depends_on</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">postgres</span><span style="color:#710">&quot;</span></span>
+    <span style="color:#606">env_file</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">./keycloak-postgres.env</span></span>
+    <span style="color:#777">#ports:</span>
+      <span style="color:#777">#- &quot;127.0.0.1:8080:8080&quot;</span>
+      <span style="color:#777">#- &quot;127.0.0.1:8787:8787&quot; # debug port</span>
+    <span style="color:#606">networks</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">keycloak</span></span>
+    <span style="color:#606">volumes</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">./imports:/opt/jboss/keycloak/imports</span></span>
+<span style="color:#777">#      - ./imports/cacerts:/usr/lib/jvm/java-17-openjdk-17.0.9.0.9-2.el9.x86_64/lib/security/cacerts</span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">./imports/cacerts:/etc/pki/ca-trust/extracted/java/cacerts</span></span>
+<span style="color:#777">#    command:</span>
+    <span style="color:#606">labels</span>:
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">traefik.enable=true</span><span style="color:#710">&quot;</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">traefik.http.routers.htl-leonding.rule=Host(`auth.htl-leonding.ac.at`)</span><span style="color:#710">&quot;</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">traefik.http.routers.htl-leonding.tls=true</span><span style="color:#710">&quot;</span></span>
+      - <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">traefik.http.services.htl-leonding.loadbalancer.server.port=8080</span><span style="color:#710">&quot;</span></span>
+      <span style="color:#777">#- &quot;traefik.http.routers.whoami.entrypoints=websecure&quot;</span>
+      <span style="color:#777">#- &quot;traefik.http.routers.whoami.tls.certresolver=myresolver&quot;</span>
+      <span style="color:#777">#- &quot;traefik.enable=true&quot;</span>
+      <span style="color:#777">#- &quot;traefik.http.routers.whoami.rule=Host(`auth.htl-leonding.ac.at`)&quot;</span>
+      <span style="color:#777">#- &quot;traefik.http.routers.whoami.entrypoints=websecure&quot;</span>
+      <span style="color:#777">#- &quot;traefik.http.routers.whoami.tls.certresolver=myresolver&quot;</span>
+
+<span style="color:#606">networks</span>:
+  <span style="color:#606">keycloak</span>:
+    <span style="color:#606">name</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">keycloak</span></span>
+    <span style="color:#606">driver</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">bridge</span></span>
+    <span style="color:#606">ipam</span>:
+      <span style="color:#606">driver</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">default</span></span>
+      <span style="color:#606">config</span>:
+        -
+          <span style="color:#606">subnet</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">10.0.1.0/24</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-04-10 16:50:42 +0200
+Last updated 2024-05-27 15:25:15 +0200
 </div>
 </div>
 <script>
