@@ -1,11 +1,13 @@
 = 23/24 4bhif wmc - Lecture Notes
-ifndef::imagesdir[:imagesdir: images]
+Thomas Stütz
+1.0.0, {docdate}: Lecture Notes for Courses at HTL Leonding
 :icons: font
 :experimental:
 :sectnums:
+ifndef::imagesdir[:imagesdir: images]
 :toc:
-ifdef::backend-html5[]
 
+ifdef::backend-html5[]
 // https://fontawesome.com/v4.7.0/icons/
 icon:file-text-o[link=https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes/main/asciidocs/{docname}.adoc] ‏ ‏ ‎
 icon:github-square[link=https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes] ‏ ‏ ‎
@@ -835,9 +837,9 @@ public class Fahrzeug {
 Möglichkeit 3: JOINED -> Attribute der Basisklasse in einer
 Tabelle und je eine Tabelle pro
 abgeleiteter Klasse (mit
-Diskriminator* DTYPE)
+Diskriminator DTYPE)
 
-__*Diskriminator = Unterscheidungsmerkmal__
+* __Diskriminator: Unterscheidungsmerkmal__
 
 [source, java]
 ----
@@ -1287,7 +1289,7 @@ ng g c components/todo
 
 == 2024-04-16 Angular HttpClient
 
-* http-client hat fetch gegenüber den Vorteil, dass gute Infrastruktur wir JWT support und middleware zum debuggen
+* http-client hat fetch gegenüber den Vorteil, dass gute Infrastruktur mit JWT support und middleware zum debuggen
 
 
 == 2024-05-21 Android
@@ -1364,3 +1366,25 @@ PGADMIN_DEFAULT_EMAIL=<your-email>
 PGADMIN_DEFAULT_PASSWORD=<pgadmin-pw>
 ----
 
+== 2024-05-28 ViewModel in Android
+
+image::viewmodel.png[]
+
+
+* https://medium.com/sahibinden-technology/package-by-layer-vs-package-by-feature-7e89cde2ae3a[Package by Layer vs Package by Feature^]
+
+
+* https://medium.com/androiddevelopers/under-the-hood-of-jetpack-compose-part-2-of-2-37b2c20c6cdd[Under the hood of Jetpack Compose — part 2 of 2^]
+
+
+* Anmerkungen zur https://github.com/caberger/android[Prof. Abergers Android-App^]
+
+
+. Einführung des MVVM - Design Patterns, ein ViewModel pro View. Damit das verständlich wird vorher unbedingt die ersten 17 Minuten von https://www.youtube.com/watch?v=W1ymVx6dmvc ansehen. Hierbei im Kopf "Swift" durch „Java" ersetzen und "SwiftUI" durch "Jetpack Compose".
+. Read Only State: In den ViewModels (Todo, Home, TabScreen) sind die Models jetzt Java Records, also readonly, damit sind die 3 Design Prinzipien OK (https://redux.js.org/understanding/thinking-in-redux/three-principles)
+. Es gibt jetzt eine saubere Preview - Architektur für alle Views und das obwohl alles in Java und nicht in Kolin geschrieben ist (mit Ausnahme der Jetpack @Composables).
+. Verbesserungen bei der Android - Implementierung (util Package) für:
+.. RestEasy Client f. Android,
+.. Microprofile config (=application.properties f. Android),
+.. Jakarta Dependency Injection (@Inject für Android) und
+.. RxJava (https://rxmarbles.com für Android).
