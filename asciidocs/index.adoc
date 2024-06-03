@@ -6,7 +6,6 @@ Thomas Stütz
 :sectnums:
 ifndef::imagesdir[:imagesdir: images]
 :toc:
-
 ifdef::backend-html5[]
 // https://fontawesome.com/v4.7.0/icons/
 icon:file-text-o[link=https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes/main/asciidocs/{docname}.adoc] ‏ ‏ ‎
@@ -1388,3 +1387,94 @@ image::viewmodel.png[]
 .. Microprofile config (=application.properties f. Android),
 .. Jakarta Dependency Injection (@Inject für Android) und
 .. RxJava (https://rxmarbles.com für Android).
+
+== 2024-05-21 Keycloak
+
+
+* IAM - Identity and Access Management
+
+** Authentification (Wer bin ich?)
+** Authorization (Was darf ich?)
+
+* Alternativen zu Keycloak
+
+** Authentik
+** Authelia
+** Auth0 (kommerziell)
+** Okta (kommerziell)
+
+
+* Hosting-Varianten
+** Hosting on-premise
+** für jedes deployment (k8s) einen eigenen keycloak Server
+** externes Hosting
+
+
+
+* Quellen
+
+** https://www.youtube.com/watch?v=6ye4lP9EA2Y
+
+
+== 2024-06-03 - Keycloak
+
+* Beispielsprojekt: /labs/keycloak-demo
+
+
+.docker-compose.yaml
+[source,yaml]
+----
+services:
+  postgres:
+    container_name: postgres_keycloak
+    image: postgres:15.3
+    volumes:
+      - ./db-data:/var/lib/postgresql/data/
+      - ./sql:/docker-entrypoint-initdb.d/:ro
+    env_file:
+      - ./keycloak-postgres.env
+    ports:
+      - "5432:5432"
+  pgadmin:
+    container_name: pgadmin_keycloak
+    image: dpage/pgadmin4:7.5
+    env_file:
+      - ./keycloak-postgres.env
+    ports:
+      - "5050:80"
+
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:24.0.4
+    restart: always
+    command:
+      - start-dev
+    depends_on:
+      - "postgres"
+    env_file:
+      - ./keycloak-postgres.env
+    ports:
+      - "127.0.0.1:8090:8080"
+      - "127.0.0.1:8787:8787" # debug port
+    volumes:
+      - ./imports:/opt/jboss/keycloak/imports
+
+----
+
+.keycloak-postgres.env
+[source,properties]
+----
+# keycloak
+KEYCLOAK_ADMIN=admin
+KEYCLOAK_ADMIN_PASSWORD=passme
+KC_DB_PASSWORD=passme # should be same as POSTGRES_PASSWORD
+#KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/quarkus-realm.json
+
+# postgres
+POSTGRES_PASSWORD=passme
+
+# postgres-pgadmin
+PGADMIN_DEFAULT_EMAIL=x.y@htl-leonding.ac.at
+PGADMIN_DEFAULT_PASSWORD=passme
+
+----
