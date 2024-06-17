@@ -1484,7 +1484,7 @@ PGADMIN_DEFAULT_PASSWORD=passme
 
 * https://www.patternfly.org/
 
-
+* https://www.youtube.com/playlist?list=PLNn3plN7ZiaqXjiDSB1KDaF3bCDuQmDgw[Keycloak DevDay 2024^]
 
 
 
