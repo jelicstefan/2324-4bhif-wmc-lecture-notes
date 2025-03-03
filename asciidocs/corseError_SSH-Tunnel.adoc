@@ -1,0 +1,39 @@
+= 2024-02-06 - CORS Error, SSH-Tunnel & GitHub Actions
+ifndef::imagesdir[:imagesdir: images]
+:icons: font
+:experimental:
+:sectnums:
+:toc:
+ifdef::backend-html5[]
+// Beispiel-Icons (optional anpassbar)
+icon:file-text-o[link=https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes/blob/main/asciidocs/2024-02-06-cors-ssh-github.adoc]
+icon:github-square[link=https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes]
+icon:home[link=http://edufs.edu.htl-leonding.ac.at/~t.stuetz/hugo/2021/01/lecture-notes/]
+endif::backend-html5[]
+
+== Ausgangsproblem
+
+Bei der Kommunikation zwischen Browser (Frontend) und dem Server (Backend) trat ein CORS-Error (Cross-Origin Resource Sharing) auf.
+* Grund: Der Browser sprach das Backend nicht über `backend` an, sondern nutzte `nginx` als Hostname.
+* Dies führte zu einer fehlerhaften CORS-Konfiguration, wodurch Browseranfragen blockiert wurden.
+
+image::cors_error_problem_explained.png[]
+
+== SSH-Tunnel um CORS Error zu umgehen
+
+Um die Kommunikation abzusichern und gleichzeitig die CORS-Problematik zu umgehen, wurde ein **SSH-Tunnel** eingerichtet:
+
+* Der SSH-Tunnel sorgt für eine verschlüsselte Verbindung zwischen Client und Server.
+* Im Zuge dessen wurde die Konfiguration angepasst, damit die richtigen Hostnamen für Backend und NGINX verwendet werden.
+
+== GitHub Actions für Deployment
+
+Zusätzlich werden **GitHub Actions** eingesetzt, um:
+
+* Kontinuierliche Integration (CI) und kontinuierliches Deployment (CD) zu automatisieren.
+* Über einen SSH-Tunnel den Code sicher auf den Zielserver zu übertragen.
+
+== Fazit
+
+Durch das **korrekte Setzen des Hostnamens** im Browser, das **Einrichten eines SSH-Tunnels** zur sicheren Kommunikation und die **automatisierten Deployments über GitHub Actions** wurde der CORS-Error behoben und die Gefahr von MitM-Angriffen effektiv minimiert.
+
